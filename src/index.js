@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/'); // Carpeta donde se guardarán las imágenes
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)); // Usar timestamp como nombre del archivo
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
