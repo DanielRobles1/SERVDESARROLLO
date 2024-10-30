@@ -2,7 +2,7 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
-const path = require('path'); // Asegúrate de importar 'path'
+const path = require('path'); 
 require('dotenv').config();
 const userRoutes = require('./routers/user');
 const productosRouter = require('./routers/productoarte');
