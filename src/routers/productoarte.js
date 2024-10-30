@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
 
+router.get
 // Obtener todas las artesanías
 router.get('/', productController.getAllProducts);
 
