@@ -28,12 +28,16 @@ exports.register = async (req, res) => {
 
         // Guardar usuario
         const savedUser = await newUser.save();
-        res.status(201).json(savedUser);
+
+        // Crear token JWT
+        const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        // Enviar usuario y token juntos
+        res.status(201).json({ user: savedUser, token });
     } catch (error) {
         res.status(500).json({ message: 'Error al registrar el usuario: ' + error.message });
     }
 };
-
 // Iniciar sesión
 exports.login = async (req, res) => {
     const { email, password } = req.body;
