@@ -7,6 +7,7 @@ require('dotenv').config();
 const userRoutes = require('./routers/user');
 const productosRouter = require('./routers/productoarte');
 const ordenRouter = require('./routers/oreden'); 
+const ventaRouter =require('./routers/venta');
 const app = express();
 const port = process.env.PORT || 4001;
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/producto', productosRouter);
 app.use('/api/orders', ordenRouter);
+app.use('/api/ventas',ventaRouter);
 
 // Ruta de bienvenida
 app.get('/', (req, res) => {
