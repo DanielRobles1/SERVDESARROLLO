@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 // Registrar usuario
 exports.register = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;  // Añadir role en la petición
 
     try {
         // Verificar si el usuario ya existe
@@ -24,13 +24,14 @@ exports.register = async (req, res) => {
             name,
             email,
             password: hashedPassword,
+            role: role || 'user', // Asignar 'user' por defecto si no se pasa el rol
         });
 
         // Guardar usuario
         const savedUser = await newUser.save();
 
         // Crear token JWT
-        const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: savedUser._id, role: savedUser.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         // Enviar usuario y token juntos
         res.status(201).json({ user: savedUser, token });
@@ -38,6 +39,7 @@ exports.register = async (req, res) => {
         res.status(500).json({ message: 'Error al registrar el usuario: ' + error.message });
     }
 };
+
 // Iniciar sesión
 exports.login = async (req, res) => {
     const { email, password } = req.body;

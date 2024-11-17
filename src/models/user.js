@@ -14,6 +14,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    role: {
+        type: String,
+        enum: ['user', 'admin'], // Definir roles disponibles
+        default: 'user', // Asignar 'user' como valor predeterminado
+    },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
