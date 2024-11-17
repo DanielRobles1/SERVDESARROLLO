@@ -1,13 +1,10 @@
-//instruccion de javascript para obtener la biblioteca que permite hacer o conectar con mongo
 const mongoose = require('mongoose');
 
 const productoSchema = new mongoose.Schema({
-name:{type:String, require:true},
-descripcion:{type:String,require:true},
-precio:{type:Number, require:true},
-Imagen:{type:Number, require:true}
-
-
+    nombre: { type: String, required: true },
+    descripcion: { type: String, required: false },
+    precioUnitario: { type: Number, required: true },
+    Imagen: { type: String, required: false }  
 });
 
-module.exports = mongoose.model('producto', productoSchema);
+module.exports = mongoose.model('Producto', productoSchema);
