@@ -5,13 +5,11 @@ const orderSchema = new mongoose.Schema({
     productos: [
         {
             productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Producto', required: true },
-            nombre: { type: String, required: true },
-            quantity: { type: Number, required: true },
-            precioUnitario: { type: Number, required: true },
-            total: { type: Number, required: true }
+           
+            quantity: { type: Number, required: true }
         }
     ],
-    totalAmount: { type: Number, required: true },
+    totalAmount: { type: Number, required: false },
     status: { type: String, default: 'Pending' },
     createdAt: { type: Date, default: Date.now },
 });
