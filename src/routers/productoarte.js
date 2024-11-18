@@ -12,6 +12,9 @@ router.post('/', productController.createProduct);
 // Obtener artesanía por su ID
 router.get('/:id', productController.getProductById);
 
+// Obtener todas las artesanias del ID de un usuario
+router.get('/obtain/:usuarioId', productController.getProductByIdUsuario);
+
 // Actualizar una artesanía por ID
 router.put('/:id', productController.updateProductById);
 
