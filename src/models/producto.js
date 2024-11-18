@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Usuario = require('./user');
 const productoSchema = new mongoose.Schema({
     nombre: { type: String, required: true },
     descripcion: { type: String, required: false },
@@ -7,7 +7,7 @@ const productoSchema = new mongoose.Schema({
     Imagen: { type: String, required: false },
     usuarioId: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Usuario', 
+        ref: 'User', 
         required: true 
     }  
 });
