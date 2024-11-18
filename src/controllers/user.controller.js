@@ -43,7 +43,6 @@ exports.register = async (req, res) => {
 // Iniciar sesión
 exports.login = async (req, res) => {
     const { email, password } = req.body;
-
     try {
         // Buscar usuario por email
         const user = await User.findOne({ email });
@@ -51,16 +50,16 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: 'Usuario o contraseña incorrectos' });
         }
 
-        // Verificar la contraseña
+        // Verifioar la contraseña
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: 'Usuario o contraseña incorrectos' });
         }
 
         // Crear y enviar token JWT
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id, role: user.role}, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, user });
-        
+
     } catch (error) {
         res.status(500).json({ message: 'Error al iniciar sesión: ' + error.message });
     }
@@ -69,7 +68,7 @@ exports.login = async (req, res) => {
 // Obtener perfil de usuario
 exports.getProfile = async (req, res) => {
     try {
-        const user = await User.findById(req.user.id).select('-password'); // Excluir el campo de contraseña
+        const user = await User.findById(req.params.id).select('-password'); // Excluir el campo de contraseña
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }

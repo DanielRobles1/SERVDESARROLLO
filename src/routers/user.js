@@ -10,7 +10,7 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 
 // Ruta para obtener perfil de usuario
-router.get('/profile', authMiddleware, userController.getProfile);
+router.get('/profile/:id', authMiddleware('user'), userController.getProfile);
 // Ruta para eliminar usuario
 router.delete('/:id', authMiddleware, userController.deleteus);
 //Ruta para actualizar info de usuaripo
