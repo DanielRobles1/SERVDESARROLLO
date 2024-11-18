@@ -16,6 +16,6 @@ router.get('/:id', productController.getProductById);
 router.put('/:id', productController.updateProductById);
 
 // Eliminar artesanía por ID
-router.delete('/:id', productController.deleteProductById);
+router.delete('/:id', productController.deleteProductById); //Hace falta que exista un middleware que verifique que el producto a eliminar sea de el
 
 module.exports = router;
