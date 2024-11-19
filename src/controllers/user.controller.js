@@ -108,6 +108,16 @@ exports.deleteus = async (req, res) => {
     }
 };
 
+//Mostrar todos los usuarios
+exports.list = async (req, res) =>{
+    try {
+        const users = await User.find()
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 //Actualizar
 exports.actuauser = async (req, res) => {
     try {
