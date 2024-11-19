@@ -14,12 +14,13 @@ exports.createOrder = async (req, res) => {
 // Obtener todas las órdenes del usuario autenticado
 exports.getUserOrders = async (req, res) => {
     try {
-        const orders = await Order.find({ userId: req.user.id }); // ID del usuario autenticado
+        const orders = await Order.find(); // ID del usuario autenticado
         res.json(orders);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 // Obtener una orden específica
 exports.getOrderById = async (req, res) => {
