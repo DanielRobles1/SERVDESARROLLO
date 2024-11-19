@@ -3,10 +3,11 @@ const router = express.Router();
 const orderController = require('../controllers/orderController');
 const verifyToken = require('../middleware/authMiddleware'); 
 // Crear una nueva orden
-router.post('/', verifyToken, orderController.createOrder); 
+router.post('/',  orderController.createOrder); 
 
 // Obtener todas las órdenes del usuario autenticado
-router.get('/', verifyToken, orderController.getUserOrders); 
+router.get('/',  orderController.getUserOrders); 
+
 // Obtener una orden específica
-router.get('/:id', verifyToken, orderController.getOrderById); 
-module.exports = router;
+router.get('/:id',  orderController.getOrderById); 
+module.exports = router;Z
