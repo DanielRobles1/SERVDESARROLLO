@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
+const verifyGeolocation = require('../middleware/ipMiddleware');
 
 router.get
 // Obtener todas las artesanías
-router.get('/', productController.getAllProducts);
+router.get('/', verifyGeolocation, productController.getAllProducts);
 
 // Crear una nueva artesanía
 router.post('/', productController.createProduct);

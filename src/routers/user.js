@@ -2,20 +2,24 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controller');
 const authMiddleware = require('../middleware/authMiddleware'); 
+const verifyGeolocation = require('../middleware/ipMiddleware');
 
 // Ruta para registrar usuario
-router.post('/register', userController.register);
+router.post('/register',verifyGeolocation, userController.register);
 
 // Ruta para iniciar sesión
 router.post('/login', userController.login);
 
-// Ruta para obtener perfil de usuario
-router.get('/profile/:id', authMiddleware('user'), userController.getProfile);
-//Ruta para admin
-router.get('/', authMiddleware(), userController.list);
-// Ruta para eliminar usuario
-router.delete('/:id', authMiddleware(), userController.deleteus);
-//Ruta para actualizar info de usuaripo
-router.patch('/:id', authMiddleware(),userController.actuauser);
+// Ruta para obtener perfil de usuario (requiere autenticación y geolocalización)
+router.get('/profile/:id', authMiddleware('user'), verifyGeolocation, userController.getProfile);
+
+// Ruta para admin (requiere autenticación y geolocalización)
+router.get('/', authMiddleware(), verifyGeolocation, userController.list);
+
+// Ruta para eliminar usuario (requiere autenticación y geolocalización)
+router.delete('/:id', authMiddleware(), verifyGeolocation, userController.deleteus);
+
+// Ruta para actualizar información de usuario (requiere autenticación y geolocalización)
+router.patch('/:id', authMiddleware(), verifyGeolocation, userController.actuauser);
 
 module.exports = router;

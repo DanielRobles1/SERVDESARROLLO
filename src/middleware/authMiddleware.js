@@ -24,3 +24,5 @@ const verifyToken = (role = 'user') => {
 };
 
 module.exports = verifyToken;
+
+

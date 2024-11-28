@@ -22,6 +22,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/producto', productosRouter);
 app.use('/api/orders', ordenRouter);
 app.use('/api/ventas',ventaRouter);
+require('dotenv').config();
 
 // Ruta de bienvenida
 app.get('/', (req, res) => {
