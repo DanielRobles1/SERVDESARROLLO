@@ -11,10 +11,11 @@ const ventaRouter =require('./routers/venta');
 const app = express();
 const port = process.env.PORT || 4001;
 
+
 // Middleware
 app.use(cors()); // Habilitar CORS
 app.use(express.json());
-
+app.set('trust proxy', true);
 
 
 
