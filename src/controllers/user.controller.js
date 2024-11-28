@@ -31,7 +31,7 @@ exports.register = async (req, res) => {
         const savedUser = await newUser.save();
 
         // Crear token JWT
-        const token = jwt.sign({ id: savedUser._id, role: savedUser.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: savedUser._id, role: savedUser.role }, process.env.JWT_SECRET);
 
         // Enviar usuario y token juntos
         res.status(201).json({ user: savedUser, token });
@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
         }
 
         // Crear y enviar token JWT
-        const token = jwt.sign({ id: user._id, role: user.role}, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id, role: user.role}, process.env.JWT_SECRET);
         res.json({ token, user });
 
     } catch (error) {
