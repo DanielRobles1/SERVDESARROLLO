@@ -5,9 +5,12 @@ const verifyGeolocation = async (req, res, next) => {
     try {
         console.log('Middleware verifyGeolocation ejecutándose...');
 
-        // Obtener la IP real desde el encabezado 'x-forwarded-for' o conexión remota
-        const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress || '8.8.8.8';
-        console.log(`IP del usuario detectada: ${userIp}`);
+        const userIp = req.headers['x-forwarded-for']
+    ? req.headers['x-forwarded-for'].split(',')[0].trim() // Primera IP del encabezado
+    : req.connection.remoteAddress;
+
+console.log('IP enviada a ipstack:', userIp);
+
 
         // Si estamos en local, saltar validación de geolocalización
         if (userIp === '::1' || userIp === '127.0.0.1') {
