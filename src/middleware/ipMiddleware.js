@@ -20,7 +20,7 @@ const verifyGeolocation = async (req, res, next) => {
             `http://api.ipstack.com/${userIp}?access_key=${process.env.IPSTACK_API_KEY}`
         );
         console.log('Respuesta completa de ipstack:', response.data);
-
+        
         // Extraer el código de país
         const { country_code } = response.data;
 
@@ -31,11 +31,12 @@ const verifyGeolocation = async (req, res, next) => {
         }
 
         console.log('Acceso permitido: La IP pertenece a México.');
+        console.log('IP detectada para geolocalización:', userIp);
+
         next(); // Continuar al siguiente middleware o ruta
     } catch (error) {
         console.error('Error al verificar la ubicación:', error.message);
-        res.status(500).json({ message: 'Error al verificar la ubicación' });
-    }
+        res.status(500).json({ message: 'Error al verificar la ubicación' }); }
 };
 
 module.exports = verifyGeolocation;
