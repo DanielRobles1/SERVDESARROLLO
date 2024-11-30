@@ -16,7 +16,7 @@ const verifyGeolocation = async (req, res, next) => {
             return next();
         }
 
-        const token = process.env.IPINFO_API_KEY || '802e02b9fa4ff1'; // Configura tu token aquí
+        const token = process.env.IPINFO_API_KEY || '802e02b9fa4ff1'; 
         const response = await axios.get(`https://ipinfo.io/${userIp}?token=${token}`);
         console.log('Respuesta completa de IPinfo.io:', response.data);
 
