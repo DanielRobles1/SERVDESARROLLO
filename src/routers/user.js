@@ -8,7 +8,7 @@ const verifyGeolocation = require('../middleware/ipMiddleware');
 router.post('/register',verifyGeolocation, userController.register);
 
 // Ruta para iniciar sesión
-router.post('/login', userController.login);
+router.post('/login', verifyGeolocation, userController.login);
 
 // Ruta para obtener perfil de usuario (requiere autenticación y geolocalización)
 router.get('/profile/:id', authMiddleware('user'), verifyGeolocation, userController.getProfile);
