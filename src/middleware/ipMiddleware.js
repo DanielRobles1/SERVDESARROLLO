@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-// Middleware para verificar la IP y ubicación geográfica
 const verifyGeolocation = async (req, res, next) => {
     try {
         console.log('Middleware verifyGeolocation ejecutándose...');
@@ -17,14 +16,10 @@ const verifyGeolocation = async (req, res, next) => {
             return next();
         }
 
-        // Hacer una solicitud a IPinfo.io para verificar la geolocalización de la IP
-        const response = await axios.get(
-            `https://ipinfo.io/${userIp}?token=${process.env.IPINFO_API_KEY}`
-        );
-
+        const token = process.env.IPINFO_API_KEY || '802e02b9fa4ff1'; // Configura tu token aquí
+        const response = await axios.get(`https://ipinfo.io/${userIp}?token=${token}`);
         console.log('Respuesta completa de IPinfo.io:', response.data);
 
-        // Extraer el código de país
         const { country } = response.data;
 
         // Verificar si el país es México
@@ -34,9 +29,7 @@ const verifyGeolocation = async (req, res, next) => {
         }
 
         console.log('Acceso permitido: La IP pertenece a México.');
-        console.log('IP detectada para geolocalización:', userIp);
-
-        next(); // Continuar al siguiente middleware o ruta
+        next();
     } catch (error) {
         console.error('Error al verificar la ubicación:', error.message);
         res.status(500).json({ message: 'Error al verificar la ubicación' });
