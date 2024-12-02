@@ -7,7 +7,10 @@ const verifyGeolocation = require('../middleware/ipMiddleware');
 router.post('/',  orderController.createOrder); 
 
 // Obtener todas las órdenes del usuario autenticado
-router.get('/',  orderController.getUserOrders); 
+router.get('/',  orderController.getOrders); 
+
+// Obtener todas las ordenes de un usuario
+router.get('/:userId',  orderController.getUserOrders); 
 
 // Obtener una orden específica
 router.get('/:id',  orderController.getOrderById); 
